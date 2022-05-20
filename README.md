@@ -1,3 +1,5 @@
+# Twitter Streaming Application
+
 This application is using  TweetinviAPI 5.0.4 nuget package.
 Entity Framework flow is setup however not enabled for the database creation logic at this time. TODO
 Unit tests projects are setup however there are no more unit tests due to time constrains. TODO
