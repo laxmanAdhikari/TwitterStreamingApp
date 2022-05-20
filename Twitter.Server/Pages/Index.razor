@@ -1,0 +1,156 @@
+﻿@page "/"
+@using Newtonsoft.Json
+@using System.Text
+@using System.Text.RegularExpressions
+@using Tweetinvi
+@using Tweetinvi.Models
+@using Twitter.Core.Constants
+@using Twitter.Core.Data
+@using Twitter.BlazorServer.Service
+@using Twitter.Model
+@using Twitter.Core.Extentions;
+@inject ITweetService tweetService
+
+<h1>Tweets Streaming</h1>
+
+<button  class="btn btn-primary" @onclick="GetTweetStreams">Get Tweet Counts</button>
+
+<p>Tweets Fetched: @tweetCounts</p>
+
+<p> Top 10 HashTags:</p>
+ @foreach(string tags in @topTenHashTags)
+  {
+    <li>@tags</li>
+  }
+
+
+<p> Tweets Details</p>
+<table>
+    <thead>
+        <tr>
+            <th>TweetID</th>
+            <th>TweetAuthor</th>
+            <th>Created</th>
+            <th>Text</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for ( int i=0; i < @fetchedTweets.Count; i++)
+        {
+            <tr>
+                <td>@fetchedTweets[i].Tweet.Id</td>
+                <td>@fetchedTweets[i].Tweet.AuthorId</td>
+                <td>@fetchedTweets[i].Tweet.Created</td>
+                <td>@fetchedTweets[i].Tweet.Text</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code{
+    int tweetCounts;
+    HashSet<string> topTenHashTags = new HashSet<string>();
+    List<SearchStreamResult> fetchedTweets = new List<SearchStreamResult>();
+
+
+    void CollectHashTags(string tweet)
+    {
+
+        var regex = new Regex(@"#\w+");
+        var matches = regex.Matches(tweet);
+        foreach (var match in matches)
+        {
+            if (!topTenHashTags.Contains(match) && topTenHashTags.Count < 10)
+            {
+                topTenHashTags.Add(match.ToString());
+                InvokeAsync(() => StateHasChanged());
+            }
+        }
+
+    }
+
+    async Task GetTweetStreams()
+    {
+
+        DotNetEnv.Env.TraversePath().Load();
+        var appCredentials = new ConsumerOnlyCredentials(Environment.GetEnvironmentVariable(TwitterConstants.CONSUMER_KEY),
+                       Environment.GetEnvironmentVariable(TwitterConstants.CONSUMER_SECRET))
+            {
+                BearerToken = Environment.GetEnvironmentVariable(TwitterConstants.BEARER_TOKEN)
+            };
+        var appClient = new TwitterClient(appCredentials);
+        var sampleStreamV2 = appClient.StreamsV2.CreateSampleStream();
+
+        sampleStreamV2.EventReceived += (sender, args) =>
+        {
+            tweetCounts = tweetCounts + 1;
+
+            if (args != null)
+                CollectHashTags(args.Json);
+
+            // Use can utilize these tweets to save to the database using the entity framework setup in this project. TODO
+            if (args != null && args.Json != null)
+            {
+                SearchStreamResult searchStreamResult = JsonConvert.DeserializeObject<SearchStreamResult>(args.Json);
+                if (searchStreamResult != null)
+                    fetchedTweets.Add(searchStreamResult);
+            }            
+
+            InvokeAsync(() => StateHasChanged());
+        };
+        await sampleStreamV2.StartAsync();
+    }
+
+    //Not used for this time
+    //async Task TwitterCount()
+    //{
+    //    tweetCounts = 0;
+    //    //Not Used for this time
+    //HttpResponseMessage? streamResponse = null;
+    //StreamReader? streamReader = null;
+    //Stream? streamContent = null;
+    //string tweet = string.Empty;
+
+
+    //    topTenHashTags = new HashSet<string>();
+    //    try
+    //    {
+    //       streamResponse = await tweetService.GetTweetSearchStreamResponseAsync();
+    //        streamContent = await streamResponse.Content.ReadAsStreamAsync();
+    //        streamReader = new StreamReader(streamContent);
+
+    //        string? tweetLine = null;
+
+    //        while((tweetLine = streamReader.ReadLine()) !=null)
+    //        {
+    //            tweet = streamReader.ReadLineAsync().Result;
+    //            tweetCounts = tweetCounts + 1;
+    //            StateHasChanged();
+    //            if (tweet != null)
+    //                CollectHashTags(tweet);
+
+    //            // Use can utilize these tweets to save to the database using the entity framework setup in this project. TODO
+    //            SearchStreamResult searchStreamResult = JsonConvert.DeserializeObject<SearchStreamResult>(tweet);
+    //            if (searchStreamResult != null)
+    //                tweets.Add(searchStreamResult);
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Console.Write($"Error occured: {ex.Message}");
+    //        throw;
+
+    //    }
+    //    finally
+    //    {
+    //        if (streamResponse != null)
+    //            streamResponse.Dispose();
+    //        if (streamReader != null)
+    //            streamReader.Dispose();
+    //        if (streamContent != null)
+    //            await streamContent.DisposeAsync();
+
+    //    }
+    //}
+
+ }

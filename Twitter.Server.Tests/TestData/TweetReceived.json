@@ -1,0 +1,219 @@
+﻿{
+  "data": {
+    "attachments": {},
+    "author_id": "1412170336645304330",
+    "context_annotations": [
+      {
+        "domain": {
+          "id": "10",
+          "name": "Person",
+          "description": "Named people in the world like Nelson Mandela"
+        },
+        "entity": {
+          "id": "1522300966057373696",
+          "name": "Isabela Boscov"
+        }
+      },
+      {
+        "domain": {
+          "id": "94",
+          "name": "Journalist",
+          "description": "A journalist like 'Anderson Cooper'"
+        },
+        "entity": {
+          "id": "1522300966057373696",
+          "name": "Isabela Boscov"
+        }
+      },
+      {
+        "domain": {
+          "id": "130",
+          "name": "Multimedia Franchise",
+          "description": "Franchises which span multiple forms of media like 'Harry Potter'"
+        },
+        "entity": {
+          "id": "1207744369144414208",
+          "name": "Kamen Rider"
+        }
+      }
+    ],
+    "conversation_id": "1527618469923106817",
+    "created_at": "2022-05-20T11:53:19.000Z",
+    "entities": {
+      "urls": [
+        {
+          "start": 34,
+          "end": 57,
+          "url": "https://t.co/HHzkOs42q6",
+          "expanded_url": "https://twitter.com/Shoumafag/status/1527439736511545344",
+          "display_url": "twitter.com/Shoumafag/stat…"
+        }
+      ]
+    },
+    "geo": {},
+    "id": "1527618469923106817",
+    "lang": "pt",
+    "possibly_sensitive": false,
+    "public_metrics": {
+      "retweet_count": 0,
+      "reply_count": 1,
+      "like_count": 0,
+      "quote_count": 0
+    },
+    "referenced_tweets": [
+      {
+        "type": "quoted",
+        "id": "1527439736511545344"
+      }
+    ],
+    "source": "Twitter for Android",
+    "text": "Vou fazer um com sentai quem poia https://t.co/HHzkOs42q6"
+  },
+  "includes": {
+    "users": [
+      {
+        "created_at": "2021-07-05T22:03:50.000Z",
+        "description": "ESTP: Um bisexual que curte tokusatsu, fã número 1 de zenkaiger, Haters de saber são sempre bem vindos aqui,  Ele/dele Conta de briga estrela: @kijibrother4",
+        "entities": {
+          "description": {
+            "mentions": [
+              {
+                "start": 143,
+                "end": 156,
+                "username": "kijibrother4"
+              }
+            ]
+          }
+        },
+        "id": "1412170336645304330",
+        "location": "sua casa",
+        "name": "Lupin Honey",
+        "pinned_tweet_id": "1477728717581525001",
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1525151426258915329/azHESful_normal.jpg",
+        "protected": false,
+        "public_metrics": {
+          "followers_count": 327,
+          "following_count": 534,
+          "tweet_count": 7628,
+          "listed_count": 0
+        },
+        "url": "",
+        "username": "kikaibee",
+        "verified": false
+      },
+      {
+        "created_at": "2021-03-03T13:14:45.000Z",
+        "description": "➮21y\n➮LGBT\n➮he/him\n➮PTBR/ENG\n❑ Atualmente assistindo: Digimon 02, Digimon Tamers\n\nTokusatsu/joniwota/doramas/BL/anime/kpop\nMaior boiola pelo @eldonOO43",
+        "entities": {
+          "description": {
+            "mentions": [
+              {
+                "start": 141,
+                "end": 151,
+                "username": "eldonOO43"
+              }
+            ]
+          }
+        },
+        "id": "1367101081889755138",
+        "location": "Rio de Janeiro, Brasil",
+        "name": "Ophani 🍂",
+        "pinned_tweet_id": "1410857444201353220",
+        "profile_image_url": "https://pbs.twimg.com/profile_images/1519139520561790976/sodUxHCj_normal.jpg",
+        "protected": false,
+        "public_metrics": {
+          "followers_count": 286,
+          "following_count": 461,
+          "tweet_count": 13135,
+          "listed_count": 6
+        },
+        "url": "",
+        "username": "Shoumafag",
+        "verified": false
+      }
+    ],
+    "tweets": [
+      {
+        "attachments": { "media_keys": [ "7_1527439382403235842" ] },
+        "author_id": "1367101081889755138",
+        "context_annotations": [
+          {
+            "domain": {
+              "id": "10",
+              "name": "Person",
+              "description": "Named people in the world like Nelson Mandela"
+            },
+            "entity": {
+              "id": "1522300966057373696",
+              "name": "Isabela Boscov"
+            }
+          },
+          {
+            "domain": {
+              "id": "94",
+              "name": "Journalist",
+              "description": "A journalist like 'Anderson Cooper'"
+            },
+            "entity": {
+              "id": "1522300966057373696",
+              "name": "Isabela Boscov"
+            }
+          },
+          {
+            "domain": {
+              "id": "130",
+              "name": "Multimedia Franchise",
+              "description": "Franchises which span multiple forms of media like 'Harry Potter'"
+            },
+            "entity": {
+              "id": "1207744369144414208",
+              "name": "Kamen Rider"
+            }
+          }
+        ],
+        "conversation_id": "1527439736511545344",
+        "created_at": "2022-05-20T00:03:06.000Z",
+        "entities": {
+          "annotations": [
+            {
+              "start": 0,
+              "end": 13,
+              "probability": 0.8808,
+              "type": "Person",
+              "normalized_text": "Isabela Boscov"
+            },
+            {
+              "start": 40,
+              "end": 50,
+              "probability": 0.653,
+              "type": "Other",
+              "normalized_text": "Kamen Rider"
+            }
+          ],
+          "urls": [
+            {
+              "start": 52,
+              "end": 75,
+              "url": "https://t.co/EgWVmz9rX1",
+              "expanded_url": "https://twitter.com/Shoumafag/status/1527439736511545344/video/1",
+              "display_url": "pic.twitter.com/EgWVmz9rX1",
+              "media_key": "7_1527439382403235842"
+            }
+          ]
+        },
+        "geo": {},
+        "id": "1527439736511545344",
+        "lang": "pt",
+        "possibly_sensitive": false,
+        "public_metrics": {
+          "retweet_count": 28,
+          "reply_count": 11,
+          "like_count": 98,
+          "quote_count": 15
+        },
+        "source": "Twitter Web App",
+        "text": "Isabela Boscov analisa as temporadas de Kamen Rider https://t.co/EgWVmz9rX1"
+      }
+    ]
+  }
+}
