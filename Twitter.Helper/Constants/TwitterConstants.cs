@@ -17,5 +17,7 @@ namespace Twitter.Core.Constants
         public const string CONSUMER_KEY = "ConsumerKey";
 
         public const string CONSUMER_SECRET = "ConsumerSecret";
+
+        public const string DATABASE_CONNECTION = "TwitterStreamDbContext";
     }
 }

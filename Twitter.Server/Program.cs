@@ -14,10 +14,9 @@ var app = builder.Build();
 // Use SQL Database 
 
 DotNetEnv.Env.TraversePath().Load();
-
 //builder.Services.AddDbContext<TwitterDbContext>( options =>
 //{
-//    options.UseSqlServer()
+//    options.UseSqlServer(Environment.GetEnvironmentVariable(TwitterConstants.DATABASE_CONNECTION))
 //});
 
 // Configure the HTTP request pipeline.
