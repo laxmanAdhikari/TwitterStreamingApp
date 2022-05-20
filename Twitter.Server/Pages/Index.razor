@@ -4,6 +4,7 @@
 @using System.Text.RegularExpressions
 @using Tweetinvi
 @using Tweetinvi.Models
+@using Tweetinvi.Streaming.V2
 @using Twitter.Core.Constants
 @using Twitter.Core.Data
 @using Twitter.BlazorServer.Service
@@ -22,10 +23,8 @@
   {
     <li>@tags</li>
   }
-
-
-<p> Tweets Details</p>
-<table>
+<div>Tweets Details</div>
+<table class='table' border ="1">
     <thead>
         <tr>
             <th>TweetID</th>
@@ -48,9 +47,10 @@
 </table>
 
 @code{
-    int tweetCounts;
+    int tweetCounts = 0;
     HashSet<string> topTenHashTags = new HashSet<string>();
     List<SearchStreamResult> fetchedTweets = new List<SearchStreamResult>();
+    ISampleStreamV2? sampleStreamV2 = null;
 
 
     void CollectHashTags(string tweet)
@@ -79,7 +79,7 @@
                 BearerToken = Environment.GetEnvironmentVariable(TwitterConstants.BEARER_TOKEN)
             };
         var appClient = new TwitterClient(appCredentials);
-        var sampleStreamV2 = appClient.StreamsV2.CreateSampleStream();
+        sampleStreamV2 = appClient.StreamsV2.CreateSampleStream();
 
         sampleStreamV2.EventReceived += (sender, args) =>
         {
@@ -88,8 +88,8 @@
             if (args != null)
                 CollectHashTags(args.Json);
 
-            // Use can utilize these tweets to save to the database using the entity framework setup in this project. TODO
-            if (args != null && args.Json != null)
+        // Use can utilize these tweets to save to the database using the entity framework setup in this project. TODO
+        if (args != null && args.Json != null)
             {
                 SearchStreamResult searchStreamResult = JsonConvert.DeserializeObject<SearchStreamResult>(args.Json);
                 if (searchStreamResult != null)
