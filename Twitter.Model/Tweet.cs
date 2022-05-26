@@ -10,8 +10,8 @@ namespace Twitter.Model
         [JsonProperty("text")]
         public string? Text { get; set; }
 
-        [JsonProperty("attachments")]
-        public Attachment? Attachments { get; set; }
+        //[JsonProperty("attachments")]
+        //public Attachment? Attachments { get; set; }
 
         [JsonProperty("author_id")]
         public string? AuthorId { get; set; }

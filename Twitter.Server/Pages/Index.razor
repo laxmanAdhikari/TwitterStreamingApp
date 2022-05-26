@@ -18,62 +18,57 @@
 
 <button  class="btn btn-primary" @onclick="GetTweetStreams">Get Tweet Counts</button>
 
-<p>Tweets Fetched: @tweetCounts</p>
-
-<p> Top 10 HashTags:</p>
- @foreach(string tags in @topTenHashTags)
-  {
-    <li>@tags</li>
-  }
-
-  <header>
-    <div class="alert-primary" align="center"><h1> Tweets Streamming Summary</h1></div>
-</header>
-
-      
-@if (fetchedTweets == null)
+@if (@tweetCounts > 0)
 {
-    <p><em>Could not fetch tweet at this time. Please try later !!!</em></p>
+    <RadzenCard>
+        <RadzenButton ButtonStyle="ButtonStyle.Primary" Class="mr-1" > 
+            Number of tweets fetched
+        <RadzenBadge BadgeStyle="BadgeStyle.Warning" Text="@tweetCounts.ToString()" />
+       </RadzenButton>
+    </RadzenCard>
+}
+
+@if (@topTenHashTags.Count > 0)
+{
+    <p> Top 10 HashTags:</p>
+    @foreach (string tags in @topTenHashTags)
+    {
+        <li>@tags</li>
+    }
+}
+
+@if(processStarted && fetchedTweets.Count < 0 )
+{
+     <p><em>Could not fetch tweet at this time. Please try later !!!</em></p>
 }
 else
 {
     List<Tweet> tweets = (from x in fetchedTweets select x.Tweet).ToList();
-    <RadzenDataGrid Data="tweets" TItem="Tweet"  WrapItems="true" AllowPaging="true" PageSize="10">
-    <Columns>
-        <RadzenDataGridColumn width ="200px" TItem="Tweet" Property="Id" Title="Tweet ID"  />
-        <RadzenDataGridColumn width ="400px" TItem="Tweet" Property="Text" Title="Tweet Text" />
-        <RadzenDataGridColumn width ="200px"  TItem="Tweet" Property="AuthorId" Title="Author ID" />
-        <RadzenDataGridColumn width ="200px"  TItem="Tweet" Property="Created" Title="Created Date" />
-        
-    </Columns>
-</RadzenDataGrid>
+    @if (tweets.Count > 0)
+    {
+        <header>
+            <div class="alert-primary" align="center"><h1> Tweets Summary</h1></div>
+        </header>    <RadzenDataGrid Data="@tweets" TItem="Tweet"  AllowFiltering="false" AllowPaging="true" AllowSorting="false" >
+            <Columns>
+                <RadzenDataGridColumn  Width="200px" TItem="Tweet" Property="Id" Title="Tweet ID">
+                    <FooterTemplate>
+                        Total records: <b>@tweets.Count()</b>
+                    </FooterTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn  Width="500px"  TItem="Tweet" Property="Text" Title="Tweet Text" />
+                <RadzenDataGridColumn  Width="200px" TItem="Tweet" Property="AuthorId" Title="Author ID" />
+                <RadzenDataGridColumn  Width="300px" TItem="Tweet" Property="Created" Title="Created Date" />
+
+            </Columns>
+        </RadzenDataGrid>
+    }
+
 }
 
-@*<div>Tweets Details</div>
-<table class='table' border ="1">
-    <thead>
-        <tr>
-            <th>TweetID</th>
-            <th>TweetAuthor</th>
-            <th>Created</th>
-            <th>Text</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for ( int i=0; i < @fetchedTweets.Count; i++)
-        {
-            <tr>
-                <td>@fetchedTweets[i].Tweet.Id</td>
-                <td>@fetchedTweets[i].Tweet.AuthorId</td>
-                <td>@fetchedTweets[i].Tweet.Created</td>
-                <td>@fetchedTweets[i].Tweet.Text</td>
-            </tr>
-        }
-    </tbody>
-</table>*@
 
 @code{
     int tweetCounts = 0;
+    bool processStarted = false;
     HashSet<string> topTenHashTags = new HashSet<string>();
     List<SearchStreamResult> fetchedTweets = new List<SearchStreamResult>();
     ISampleStreamV2? sampleStreamV2 = null;
@@ -97,7 +92,7 @@ else
 
     async Task GetTweetStreams()
     {
-
+        processStarted = true;
         DotNetEnv.Env.TraversePath().Load();
         var appCredentials = new ConsumerOnlyCredentials(Environment.GetEnvironmentVariable(TwitterConstants.CONSUMER_KEY),
                        Environment.GetEnvironmentVariable(TwitterConstants.CONSUMER_SECRET))
