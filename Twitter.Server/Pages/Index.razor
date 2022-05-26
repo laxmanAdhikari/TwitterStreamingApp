@@ -10,6 +10,8 @@
 @using Twitter.BlazorServer.Service
 @using Twitter.Model
 @using Twitter.Core.Extentions;
+@using Radzen;
+@using Radzen.Blazor;
 @inject ITweetService tweetService
 
 <h1>Tweets Streaming</h1>
@@ -23,7 +25,31 @@
   {
     <li>@tags</li>
   }
-<div>Tweets Details</div>
+
+  <header>
+    <div class="alert-primary" align="center"><h1> Tweets Streamming Summary</h1></div>
+</header>
+
+      
+@if (fetchedTweets == null)
+{
+    <p><em>Could not fetch tweet at this time. Please try later !!!</em></p>
+}
+else
+{
+    List<Tweet> tweets = (from x in fetchedTweets select x.Tweet).ToList();
+    <RadzenDataGrid Data="tweets" TItem="Tweet"  WrapItems="true" AllowPaging="true" PageSize="10">
+    <Columns>
+        <RadzenDataGridColumn width ="200px" TItem="Tweet" Property="Id" Title="Tweet ID"  />
+        <RadzenDataGridColumn width ="400px" TItem="Tweet" Property="Text" Title="Tweet Text" />
+        <RadzenDataGridColumn width ="200px"  TItem="Tweet" Property="AuthorId" Title="Author ID" />
+        <RadzenDataGridColumn width ="200px"  TItem="Tweet" Property="Created" Title="Created Date" />
+        
+    </Columns>
+</RadzenDataGrid>
+}
+
+@*<div>Tweets Details</div>
 <table class='table' border ="1">
     <thead>
         <tr>
@@ -44,7 +70,7 @@
             </tr>
         }
     </tbody>
-</table>
+</table>*@
 
 @code{
     int tweetCounts = 0;
