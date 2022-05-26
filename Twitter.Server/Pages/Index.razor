@@ -48,7 +48,8 @@ else
     {
         <header>
             <div class="alert-primary" align="center"><h1> Tweets Summary</h1></div>
-        </header>    <RadzenDataGrid Data="@tweets" TItem="Tweet"  AllowFiltering="false" AllowPaging="true" AllowSorting="false" >
+        </header>   
+        <RadzenDataGrid Data="@tweets" TItem="Tweet"  AllowFiltering="false" AllowPaging="true" AllowSorting="false" >
             <Columns>
                 <RadzenDataGridColumn  Width="200px" TItem="Tweet" Property="Id" Title="Tweet ID">
                     <FooterTemplate>
