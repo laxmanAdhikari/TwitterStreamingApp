@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Twitter.Model.Entities
 {
@@ -12,11 +8,21 @@ namespace Twitter.Model.Entities
     {
 
         public int AuthorId { get; set; }
-        public int TweetId { get; set; }
+        public string TweeterTweetId { get; set; }
 
-        public string? Content { get; set; }
+        public string Content { get; set; }
 
         public DateTimeOffset TwitterPublished { get; set; }
+
+        public Author Author { get; set; }
+
+
+        public static void OnModelCreating(EntityTypeBuilder<Tweet> builder)
+        {
+            OnModelCreating<Tweet>(builder);
+            builder.Property(tweet => tweet.TweeterTweetId).HasMaxLength(50);
+            builder.Property(tweet => tweet.Content).HasMaxLength(1000);
+        }
 
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Twitter.Core.Data.UserObjects
+namespace Twitter.Model
 {
     public class User
     {

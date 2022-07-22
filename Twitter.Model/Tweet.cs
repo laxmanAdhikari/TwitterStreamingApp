@@ -10,14 +10,14 @@ namespace Twitter.Model
         [JsonProperty("text")]
         public string? Text { get; set; }
 
-        //[JsonProperty("attachments")]
-        //public Attachment? Attachments { get; set; }
+        [JsonProperty("attachments")]
+        public Attachment? Attachments { get; set; }
 
         [JsonProperty("author_id")]
         public string? AuthorId { get; set; }
 
         [JsonProperty("created_at")]
-        public string? Created { get; set; }
+        public DateTimeOffset Created { get; set; }
 
         [JsonProperty("referenced_tweets")]
         public List<ReferenceTweet>? ReferenceTweets { get; set; }

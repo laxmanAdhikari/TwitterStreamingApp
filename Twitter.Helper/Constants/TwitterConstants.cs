@@ -10,7 +10,7 @@ namespace Twitter.Core.Constants
     {
         public const string EXPANSIONS_AND_FIELD_QUERY = "expansions=author_id,in_reply_to_user_id,attachments.media_keys&user.fields=profile_image_url,username&tweet.fields=created_at,referenced_tweets&media.fields=media_key,url,type";
 
-        public const string SAMPLE_STREAM_URL = "https://api.twitter.com/2/tweets/sample/stream";
+        public const string SAMPLE_STREAM_URL = "TwitterStreamApi";
 
         public const string BEARER_TOKEN = "BearerToken";
 
