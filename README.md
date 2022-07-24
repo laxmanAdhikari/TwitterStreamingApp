@@ -16,8 +16,8 @@
  # .env File
  Please create .env file in the root directory of the project location and provide the approriate values to run this application
  
- BearerToken= "twitter auth bearer token"
- ConsumerKey= "consumer key"
- ConsumerSecret= "consumer secret"
- TwitterStreamDbContext="server=(local)\\SqlExpress;database=TweetStreaming;trusted_connection=true" (or any sql server connection string)
- TwitterStreamApi= "https://api.twitter.com/2/tweets/sample/stream"
+ - BearerToken= "twitter auth bearer token"
+ - ConsumerKey= "consumer key"
+ - ConsumerSecret= "consumer secret"
+ - TwitterStreamDbContext="server=(local)\\SqlExpress;database=TweetStreaming;trusted_connection=true" (or any sql server connection string)
+ - TwitterStreamApi= "https://api.twitter.com/2/tweets/sample/stream"
