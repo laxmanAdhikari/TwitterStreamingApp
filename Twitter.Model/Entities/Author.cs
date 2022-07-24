@@ -11,13 +11,13 @@ namespace Twitter.Model.Entities
     [Table("Author", Schema = "JH.TwitterStreamingApp")]
     public class Author: Base
     {
-       public string? TwwitterAuthorId { get; set; }
+       public string TwwitterAuthorId { get; set; }
 
-        public string? TwitterName { get; set; }
+        public string TwitterName { get; set; }
 
-        public string? TwitterHandle { get; set; }
+        public string TwitterHandle { get; set; }
 
-        public string? TwitterImageUrl { get; set; }
+        public string TwitterImageUrl { get; set; }
 
         public static void OnModelCreating(EntityTypeBuilder<Author> builder)
         {

@@ -22,6 +22,9 @@ namespace Twitter.Model
         [JsonProperty("referenced_tweets")]
         public List<ReferenceTweet>? ReferenceTweets { get; set; }
 
+        [JsonProperty("entities")]
+        public TwitterEntities.Entities Entities { get; set; }
+
 
     }
 }

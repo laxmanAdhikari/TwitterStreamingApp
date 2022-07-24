@@ -16,6 +16,7 @@ namespace Twitter.Model.Entities
 
         public Author Author { get; set; }
 
+        public HashTag HashTag { get; set; }
 
         public static void OnModelCreating(EntityTypeBuilder<Tweet> builder)
         {
