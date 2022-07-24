@@ -41,16 +41,21 @@ namespace TwitterStreamApi.Services
                                    (hashtag => hashtag.Id).OrderByDescending(hashtag => hashtag.Created)
                                    .Skip(batchNumber * topNthvalue).Take(topNthvalue).ToList();
 
+                
+
                 foreach (var tag in hashTags)
                 {
                     if (HashTagCollection.Count == topNthvalue)
                         return Task.FromResult(HashTagCollection);
 
-                    if (!HashTagCollection.Contains(tag.HashTagName) && HashTagCollection.Count < 10)
+                    if (!HashTagCollection.Contains(tag.HashTagName) && HashTagCollection.Count < topNthvalue)
                     {
                         HashTagCollection.Add(tag.HashTagName);
                     }
                 }
+
+                if (HashTagCollection.Count == topNthvalue)
+                    return Task.FromResult(HashTagCollection);
 
                 if (HashTagCollection.Count < topNthvalue)
                 {
