@@ -33,6 +33,8 @@ namespace Twitter.StreamApi.Extentions
             services.AddHostedService<TwitterIntegrationBackgroundService>();
             services.AddSingleton<ITwitterIntegrationJobService, TwitterIntegrationJobService>();
 
+            services.AddHttpClient();
+
             services.AddSignalR();
 
             services.AddSwaggerGen(opt =>

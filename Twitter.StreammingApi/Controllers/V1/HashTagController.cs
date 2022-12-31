@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Diagnostics.CodeAnalysis;
+using Twitter.Core.Exceptions;
+using Twitter.StreammingApi.Pagination;
 
 namespace Twitter.StreammingApi.Controllers.V1
 {
@@ -38,6 +40,39 @@ namespace Twitter.StreammingApi.Controllers.V1
             catch (Exception exception)
             {
                 return BadRequest(exception.Message);
+            }
+
+        }
+
+        [HttpGet]
+        [Route("api/v1/hashtags/pagination")]
+        [SwaggerOperation(Summary = "Get HashTags", Description = "Get Paginated Hashtags from the recent tweets.")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetPaginationResults([FromQuery] PaginationParams param)
+        {
+
+            try
+            {
+                var hashTags = await _hashTagService.GetHashTagsPagination(param);
+                List<string> HashTagCollection = new();
+
+                foreach (var tag in hashTags.Take(10).ToList())
+                {
+                    
+                    if (!HashTagCollection.Contains(tag.HashTagName))
+                    {
+                        HashTagCollection.Add(tag.HashTagName);
+                    }
+                }
+
+                return Ok(HashTagCollection);
+            }
+            catch (Exception ex)
+            {
+                throw new TwitterException($"Error occured {ex}");
+
             }
 
         }

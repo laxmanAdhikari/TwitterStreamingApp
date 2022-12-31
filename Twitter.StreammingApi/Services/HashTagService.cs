@@ -3,6 +3,7 @@ using Twitter.Model.Entities;
 using TwitterStreamApi.Services.Base;
 using TwitterStreamApi.Data;
 using Twitter.Core.Extentions;
+using Twitter.StreammingApi.Pagination;
 
 namespace TwitterStreamApi.Services
 {
@@ -64,6 +65,24 @@ namespace TwitterStreamApi.Services
             } while (HashTagCollection.Count <= topNthvalue);
 
             return Task.FromResult(HashTagCollection);
+        }
+
+        public async Task<List<HashTag>> GetHashTagsPagination(PaginationParams param)
+        {
+            var hashTags = new List<HashTag>();
+
+            if (param.PageSize >0)
+            {
+                if (param.PageSize > 100)
+                {
+                    param.PageSize = 100;
+                }
+            
+             hashTags = await _twitterDbContext.HashTagsEntities.OrderByDescending(hashtag => hashtag.Id)
+                    .OrderByDescending(hashtag => hashtag.Created).Skip(param.PageSize * (param.PageNumber-1)).Take(param.PageSize).ToListAsync();
+            }
+
+            return hashTags;
         }
     }
 }

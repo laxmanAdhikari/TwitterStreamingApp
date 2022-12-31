@@ -8,9 +8,12 @@ namespace Twitter.Core.Services
     public class TwitterApiTweetService : ITwitterApiTweetService
     {
         protected readonly ILogger<TwitterApiTweetService> _logger;
-        public TwitterApiTweetService(ILogger<TwitterApiTweetService> logger)
+
+        private readonly IHttpClientFactory _httpClientFactory;
+        public TwitterApiTweetService(ILogger<TwitterApiTweetService> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
+            _httpClientFactory = httpClientFactory;
         }
 
         public async Task<HttpResponseMessage> GetTweetSearchStreamResponseAsync()
@@ -23,7 +26,7 @@ namespace Twitter.Core.Services
 
             try
             {
-                using (var httpClient = new HttpClient())
+                using (var httpClient = _httpClientFactory.CreateClient())
                 {
                     using (var request = new HttpRequestMessage(HttpMethod.Get, url))
                     {
