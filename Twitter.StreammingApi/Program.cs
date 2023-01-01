@@ -5,6 +5,16 @@ WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 builder.Services.ServicesDependencyInjection();
 builder.Services.Configure<ApiConfiguration>(builder.Configuration.GetSection("Tweets"));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("TweetPolicy", builder =>
+    {
+        builder.AllowAnyHeader();
+        builder.AllowAnyMethod();
+        builder.AllowAnyOrigin();
+    });
+});
+
 var app = builder.Build();
 
 app.UseStaticFiles();
@@ -34,6 +44,8 @@ app.MapControllers();
 app.MapHub<TwitterStreamHub>("/twitter-hub");
 
 app.MapControllers();
+
+app.UseCors("TweetPolicy");
 
 app.Run();
 
