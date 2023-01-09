@@ -1,9 +1,9 @@
-﻿namespace Twitter.StreammingApi.Pagination
+﻿namespace Twitter.Service.Pagination
 {
     public class PaginationParams
     {
 
-        public int PageSize { get; set; } = 10;
+        public int PageSize { get; set; } = 0;
         public int PageNumber { get; set; } = 1;
 
     }

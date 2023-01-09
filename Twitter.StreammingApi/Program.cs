@@ -4,6 +4,7 @@ WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.ServicesDependencyInjection();
 builder.Services.Configure<ApiConfiguration>(builder.Configuration.GetSection("Tweets"));
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddCors(options =>
 {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Twitter.Core.Exceptions;
 using Twitter.Model;
 using Twitter.Model.Entities;
-using TwitterStreamApi.Services;
+using Twitter.Service.Services;
 using Tweet = Twitter.Model.Entities.Tweet;
 
 namespace TwitterStreamApiHelper.Tasks.Extensions

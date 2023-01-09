@@ -1,15 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Twitter.Model.Entities;
-using TwitterStreamApi.Dto;
 
-namespace TwitterStreamApi.Data
+namespace Twitter.Service.Data
 {
     public class TwitterDbContext : DbContext
     {
 
         public TwitterDbContext(DbContextOptions<TwitterDbContext> options) : base(options)
         {
-
+           
         }
 
         protected override void OnModelCreating (ModelBuilder modelBuilder)
@@ -21,11 +20,11 @@ namespace TwitterStreamApi.Data
             base.OnModelCreating (modelBuilder);
         }
 
-        public DbSet<Author> AuthorEntities { get; set; }
+        public DbSet<Author>? AuthorEntities { get; set; }
 
-        public DbSet<Tweet> TweetEntities { get; set; }
+        public DbSet<Tweet>? TweetEntities { get; set; }
 
-        public DbSet<HashTag> HashTagsEntities { get; set; }
+        public DbSet<HashTag>? HashTagsEntities { get; set; }
 
     }
 

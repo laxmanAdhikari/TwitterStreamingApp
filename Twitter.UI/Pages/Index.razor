@@ -2,8 +2,13 @@
 
 @using System.Text.Json
 @using System.Text.Json.Serialization
+@using Microsoft.EntityFrameworkCore
+@using Twitter.Service.Data
+@using Twitter.Model.Entities
+{
 
-@inject IHttpClientFactory ClientFactory
+@inject ITweetService TweetService;
+@inject IDbContextFactory<TwitterDbContext> DbFactory
 
 <PageTitle>Tweet Counter</PageTitle>
 
@@ -20,49 +25,36 @@ else
 
 @code {
     private int currentCount = 0;
+
+    private List<Tweet> twitters = new List<Tweet>();
     private bool shouldRender;
     private bool getTweetCountError;
-
-    protected override bool ShouldRender() => shouldRender;
 
     protected  override async Task OnInitializedAsync()
     {
 
-        var timer = new Timer(new TimerCallback(async _ =>
+        using var context = DbFactory.CreateDbContext();
+
+        try
         {
-            
-            var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost:8080/api/v1/count");
-
-        request.Headers.Add("Accept", "application/json");
-        request.Headers.Add("User-Agent", "Twitter V2 Api");
-
-        var client = ClientFactory.CreateClient();
-
-        var response = await client.SendAsync(request);
-
-        if(response.IsSuccessStatusCode)
-        {
-            using var responseStream = await response.Content.ReadAsStreamAsync();
-
-            currentCount = await JsonSerializer.DeserializeAsync<int>(responseStream);
-
+            twitters = context.TweetEntities.ToList();
         }
-        else
+        catch (Exception ex)
         {
             getTweetCountError = true;
         }
 
-        shouldRender = true;
+               
+        //var timer = new Timer(new TimerCallback(async _ =>
+        //{
+        
 
-                // Note that the following line is necessary because otherwise
-                // Blazor would not recognize the state change and not refresh the UI
-                await InvokeAsync(() =>
-                {
-
-                    StateHasChanged();
-                });
+        //await InvokeAsync(() =>
+        //       {
+        //           StateHasChanged();
+        //       });
             
-        }), null, 1000, 1000);
+        //}), null, 1000, 1000);
        
     }
 }

@@ -1,0 +1,35 @@
+﻿@page "/hashtag"
+
+<HeadContent>
+    <style>
+        html, body { overflow-y: scroll }
+    </style>
+</HeadContent>
+
+<h1>Hash Tags</h1>
+
+<table id="virtualized-table">
+    <thead style="position: sticky; top: 0; background-color: silver">
+        <tr>
+            <th>TweetId</th>
+            <th>AuthorId</th>
+            <th>HashTags</th>
+        </tr>
+    </thead>
+    <tbody>
+        <Virtualize Items="@fixedItems" ItemSize="30" SpacerElement="tr">
+            <tr @key="context" style="height: 30px;" id="row-@context">
+                <td>Item @context</td>
+                <td>Another value</td>
+                <td>Another value2</td>
+            </tr>
+        </Virtualize>
+    </tbody>
+</table>
+
+@code {
+    private List<int> fixedItems = Enumerable.Range(0, 1000).ToList();
+}
+
+
+

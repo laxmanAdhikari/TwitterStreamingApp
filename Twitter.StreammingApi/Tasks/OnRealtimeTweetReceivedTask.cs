@@ -4,14 +4,12 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.SignalR;
 using TaskExtensions = TwitterStreamApiHelper.Tasks.Extensions.TaskExtensions;
 using TwitterStreamBackgroundTask.Tasks.BaseObject;
-using TwitterStreamApiHelper.Hubs;
 using Twitter.Model;
 using Twitter.Core.Exceptions;
 using Twitter.Core.Extentions;
-using TwitterStreamApi.Services;
-using TwitterStreamApi.Data;
 using TwitterStreamApiHelper.Hubs.Extensions;
 using Twitter.Model.Results;
+using Twitter.Service.Services;
 
 namespace TwitterStreamBackgroundTask.Tasks
 {

@@ -1,7 +1,7 @@
 using Moq;
 using System.Net;
+using Twitter.Service.Services;
 using Twitter.StreamApi.Controllers.V1;
-using TwitterStreamApi.Services;
 
 namespace Twitter.StreammimgApi.Tests
 {

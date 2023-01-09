@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Twitter.Model.Entities;
 using TwitterStreamApi.Services.Base;
-using TwitterStreamApi.Data;
 using Twitter.Core.Extentions;
-using Twitter.StreammingApi.Pagination;
+using Twitter.Service.Data;
+using Twitter.Service.Pagination;
 
 namespace TwitterStreamApi.Services
 {
@@ -78,11 +78,12 @@ namespace TwitterStreamApi.Services
                     param.PageSize = 100;
                 }
             
-             hashTags = await _twitterDbContext.HashTagsEntities.OrderByDescending(hashtag => hashtag.Id)
+             return await _twitterDbContext.HashTagsEntities.OrderByDescending(hashtag => hashtag.Id)
                     .OrderByDescending(hashtag => hashtag.Created).Skip(param.PageSize * (param.PageNumber-1)).Take(param.PageSize).ToListAsync();
             }
 
-            return hashTags;
+            return await _twitterDbContext.HashTagsEntities.OrderByDescending(hashtag => hashtag.Id)
+                    .OrderByDescending(hashtag => hashtag.Created).ToListAsync();
         }
     }
 }

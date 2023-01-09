@@ -1,10 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using TwitterStreamApi.Services.Base;
+﻿using TwitterStreamApi.Services.Base;
 using Twitter.Model.Entities;
-using TwitterStreamApi.Services;
-using TwitterStreamApi.Data;
 using Twitter.Core.Extentions;
-using System.Text.RegularExpressions;
 
 namespace TwitterStreamApi.Services
 {

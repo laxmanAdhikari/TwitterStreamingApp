@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Twitter.Core.Extentions;
 using Twitter.Model.Entities;
-using TwitterStreamApi.Data;
-using TwitterStreamApi.Services.Base;
 
 namespace TwitterStreamApi.Services.Base
 {

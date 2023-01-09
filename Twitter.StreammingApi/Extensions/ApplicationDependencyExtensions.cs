@@ -1,10 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Twitter.Core.Constants;
-using Twitter.Core.Services;
-using TwitterStreamApi.Background;
-using TwitterStreamApi.Background.Jobs;
-using TwitterStreamApi.Data;
-using TwitterStreamApi.Services;
+﻿using Twitter.Service.Data;
+using Twitter.Service.Services;
 
 namespace Twitter.StreamApi.Extentions
 {
@@ -33,6 +28,7 @@ namespace Twitter.StreamApi.Extentions
             services.AddHostedService<TwitterIntegrationBackgroundService>();
             services.AddSingleton<ITwitterIntegrationJobService, TwitterIntegrationJobService>();
 
+            // Register IHttpFactory
             services.AddHttpClient();
 
             services.AddSignalR();

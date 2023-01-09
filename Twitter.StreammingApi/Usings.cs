@@ -5,7 +5,6 @@ global using Twitter.StreamApi.Extentions;
 global using TwitterStreamApi.Background;
 global using TwitterStreamApi.Background.Jobs;
 global using TwitterStreamApi.Configuration;
-global using TwitterStreamApi.Data;
+global using Twitter.Service.Data;
 global using TwitterStreamApi.Pipeline;
-global using TwitterStreamApi.Services;
 global using TwitterStreamApiHelper.Hubs;

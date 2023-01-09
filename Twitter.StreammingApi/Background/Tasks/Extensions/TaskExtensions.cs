@@ -1,6 +1,7 @@
 ﻿using Twitter.Core.Exceptions;
 using Twitter.Model;
 using Twitter.Model.Entities;
+using Twitter.Service.Services;
 
 namespace TwitterStreamApi.Tasks.Extensions
 {

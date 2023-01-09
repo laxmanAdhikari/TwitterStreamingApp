@@ -1,14 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Net;
-using TwitterStreamApi.Data;
-using Twitter.Model;
-using TwitterStreamApi.Dto;
-using TwitterStreamApi.Background;
-using Twitter.Core.Services;
-using TwitterStreamApi.Services;
 using System.Diagnostics.CodeAnalysis;
 using Swashbuckle.AspNetCore.Annotations;
+using Twitter.Service.Services;
 
 namespace Twitter.StreamApi.Controllers.V1
 {

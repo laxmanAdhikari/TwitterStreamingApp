@@ -9,6 +9,7 @@ using Twitter.Core.Exceptions;
 using Twitter.Core.Extentions;
 using TwitterStreamApiHelper.Hubs.Extensions;
 using Twitter.Model.Results;
+using Twitter.Service.Services;
 
 namespace TwitterStreamApi.Background.Tasks
 {

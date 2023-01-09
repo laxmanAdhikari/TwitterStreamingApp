@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Diagnostics.CodeAnalysis;
 using Twitter.Core.Exceptions;
-using Twitter.StreammingApi.Pagination;
+using Twitter.Service.Pagination;
+using Twitter.Service.Services;
 
 namespace Twitter.StreammingApi.Controllers.V1
 {
@@ -55,10 +56,10 @@ namespace Twitter.StreammingApi.Controllers.V1
 
             try
             {
-                var hashTags = await _hashTagService.GetHashTagsPagination(param);
+                var hashTags = await _hashTagService.GetHashTags(param);
                 List<string> HashTagCollection = new();
 
-                foreach (var tag in hashTags.Take(10).ToList())
+                foreach (var tag in hashTags.ToList())
                 {
                     
                     if (!HashTagCollection.Contains(tag.HashTagName))

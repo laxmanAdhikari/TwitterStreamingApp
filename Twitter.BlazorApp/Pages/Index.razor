@@ -1,0 +1,48 @@
+﻿@page "/"
+
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@using Microsoft.EntityFrameworkCore
+@using Twitter.Service.Data
+@using Twitter.Model.Entities
+
+
+@inject ITweetService TweetService
+
+<PageTitle>Tweet Counter</PageTitle>
+
+<h1> Tweet Counter</h1>
+
+@if (getTweetCountError)
+{
+    <p>Unable to get Tweet count </p>
+}
+else
+{
+    <p role="status">Current tweet count: @currentCount</p>
+}
+
+@code {
+    private int currentCount = 0;
+
+    private List<Tweet> twitters = new List<Tweet>();
+    private bool shouldRender;
+    private bool getTweetCountError;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var timer = new Timer(new TimerCallback(async _ =>
+        {
+        
+        await InvokeAsync(() =>
+
+               {
+                   currentCount = TweetService.GetCount().Result;
+                  StateHasChanged();
+             });
+
+        }), null, 1000, 1000);
+
+    }
+}
+

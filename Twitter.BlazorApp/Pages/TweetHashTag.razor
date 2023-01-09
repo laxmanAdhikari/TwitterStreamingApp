@@ -1,0 +1,57 @@
+﻿@page "/tweethashtag"
+@using Twitter.BlazorApp.Models;
+@using Twitter.Model.Entities;
+@using Radzen;
+@using Radzen.Blazor;
+
+
+@inject IHashTagService HashTagService
+
+@if (getHashTagError && hashtags.Count < 0)
+{
+    <p><em>Could not fetch tweet at this time. Please try later !!!</em></p>
+}
+else
+{
+  
+        <header>
+            <div class="alert-primary" align="center"><h1> Tweet Hash Tags</h1></div>
+        </header>   
+        <RadzenDataGrid Data="@hashtags" TItem="HashTag"  AllowFiltering="true" AllowPaging="true" AllowSorting="false" >
+            <Columns>
+                <RadzenDataGridColumn  Width="200px" TItem="HashTag" Property="TweeterTweetId" Title="Tweet ID">
+                    <FooterTemplate>
+                    Total records: <b>@hashtags.Count()</b>
+                    </FooterTemplate>
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn  Width="200px" TItem="HashTag" Property="AuthorId" Title="Author ID" />
+                <RadzenDataGridColumn  Width="200px" TItem="HashTag" Property="HashTagName" Title="HashTag Name" />
+
+            </Columns>
+        </RadzenDataGrid>
+    
+
+}
+
+   
+ @code
+{
+
+    private bool getHashTagError;
+    private List<HashTag> hashtags = new List<HashTag>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            hashtags = await HashTagService.GetHashTagsForUI();
+        }
+        catch (Exception ex)
+        {
+            getHashTagError = true;
+        }
+    }
+}
+
+
+
