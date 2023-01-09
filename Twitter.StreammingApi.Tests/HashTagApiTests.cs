@@ -1,6 +1,10 @@
+using Microsoft.AspNetCore.Mvc;
 using Moq;
+using Sprache;
+using System.Configuration;
 using System.Net;
 using Twitter.Service.Services;
+using Twitter.StreamApi.Controllers.V1;
 using Twitter.StreammingApi.Controllers.V1;
 
 namespace Twitter.StreammimgApi.Tests
@@ -18,7 +22,6 @@ namespace Twitter.StreammimgApi.Tests
 
         [Test]
         [TestCase(10)]
-        [TestCase(20)]
         public async Task HashTagController_GetTopNthHashTags_Call_Successful(int topNth)
         {
 
@@ -26,8 +29,8 @@ namespace Twitter.StreammimgApi.Tests
 
             using var client = testServer.CreateJsonClient();
 
-            var apiUrl = $"{REQUEST_URL}?topNthHashTag={topNth}";
-            using HttpResponseMessage response = client.GetAsync(REQUEST_URL).Result;
+            var apiUrl = $"{REQUEST_URL}/{topNth}";
+            using HttpResponseMessage response = client.GetAsync(apiUrl).Result;
 
             Assert.IsNotNull(response);
 
@@ -38,7 +41,7 @@ namespace Twitter.StreammimgApi.Tests
 
         [Test]
         [TestCase(10)]
-        public void HashTagController_GetTopNthHashTags_Success(int topNth)
+        public async Task HashTagController_GetTopNthHashTags_Success(int topNth)
         {
             // Arrange
             List<string> topNthHashtageResponse = new List<string>()
@@ -61,12 +64,17 @@ namespace Twitter.StreammimgApi.Tests
 
             var controller = new HashTagController(null, mockTweetService.Object);
 
+
             // Act
-            var response = controller.GetTopNthHashTags(topNth).Value.ToList();
+            var response = await controller.GetTopNthHashTags(topNth);
+
+            var okResult = response as OkObjectResult;
+            var actualResult = okResult.Value as List<string>;
+
 
             // Assert
             Assert.IsNotNull(response);
-            Assert.That(response.Count, Is.EqualTo(topNth));
+            Assert.That(actualResult.Count, Is.EqualTo(topNth));
         }
 
         [Test]

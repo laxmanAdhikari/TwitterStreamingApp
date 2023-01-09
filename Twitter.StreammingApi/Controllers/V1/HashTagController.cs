@@ -26,7 +26,7 @@ namespace Twitter.StreammingApi.Controllers.V1
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<IEnumerable<string>> GetTopNthHashTags(int topnth)
+        public async Task<IActionResult> GetTopNthHashTags(int topnth)
         {
             var parameters = new Dictionary<string, object>();
 
@@ -34,7 +34,7 @@ namespace Twitter.StreammingApi.Controllers.V1
 
             try
             {
-                var result = _hashTagService.GetHashTags(topnth);
+                var result = await _hashTagService.GetHashTags(topnth);
 
                 return Ok(result);
             }

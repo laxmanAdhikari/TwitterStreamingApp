@@ -43,7 +43,7 @@ namespace Twitter.Service.Services
             }
         }
 
-        public Task<List<string>> GetHashTags(int topNthvalue)
+        public async Task<List<string>> GetHashTags(int topNthvalue)
         {
             int batchNumber = 0;
 
@@ -51,16 +51,16 @@ namespace Twitter.Service.Services
             do
             {
                 using var db = new TwitterDbContext(_twitterDbContext);
-                var hashTags = db.HashTagsEntities.OrderByDescending
+                var hashTags = await db.HashTagsEntities.OrderByDescending
                                    (hashtag => hashtag.Id).OrderByDescending(hashtag => hashtag.Created)
-                                   .Skip(batchNumber * topNthvalue).Take(topNthvalue).ToList();
+                                   .Skip(batchNumber * topNthvalue).Take(topNthvalue).ToListAsync();
 
 
 
                 foreach (var tag in hashTags)
                 {
                     if (HashTagCollection.Count == topNthvalue)
-                        return Task.FromResult(HashTagCollection);
+                        return HashTagCollection;
 
                     if (!HashTagCollection.Contains(tag.HashTagName) && HashTagCollection.Count < topNthvalue)
                     {
@@ -69,7 +69,7 @@ namespace Twitter.Service.Services
                 }
 
                 if (HashTagCollection.Count == topNthvalue)
-                    return Task.FromResult(HashTagCollection);
+                    return HashTagCollection;
 
                 if (HashTagCollection.Count < topNthvalue)
                 {
@@ -77,7 +77,7 @@ namespace Twitter.Service.Services
                 }
             } while (HashTagCollection.Count <= topNthvalue);
 
-            return Task.FromResult(HashTagCollection);
+            return HashTagCollection;
         }
 
         public async Task<List<HashTag>> GetHashTags(PaginationParams? param)

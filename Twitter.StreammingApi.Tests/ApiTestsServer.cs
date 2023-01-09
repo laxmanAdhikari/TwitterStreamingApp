@@ -19,6 +19,7 @@ namespace Twitter.StreammimgApi.Tests
         {
             _environment = environment;
             WebApplicationFactoryClientOptions webApplicationFactoryClientOptions = new WebApplicationFactoryClientOptions();
+
             webApplicationFactoryClientOptions.BaseAddress = new Uri(API_BASE_URL);
         }
 
