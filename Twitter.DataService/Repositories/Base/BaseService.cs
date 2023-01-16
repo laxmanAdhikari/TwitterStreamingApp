@@ -3,8 +3,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics.CodeAnalysis;
 using Twitter.Core.Extentions;
+using Twitter.Data;
 using Twitter.Model.Entities;
-using Twitter.Service.Data;
 
 namespace Twitter.Service.Services.Base
 {

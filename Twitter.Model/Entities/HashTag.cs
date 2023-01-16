@@ -17,6 +17,7 @@ namespace Twitter.Model.Entities
 
         public static void OnModelCreating(EntityTypeBuilder<Entities.HashTag> builder)
         {
+            
             OnModelCreating<Entities.HashTag>(builder);
 
         }

@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
 using Twitter.Core.Extentions;
+using Twitter.Data;
 using Twitter.Model.Entities;
-using Twitter.Service.Data;
 using Twitter.Service.Services.Base;
 
 namespace Twitter.Service.Services

@@ -1,13 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using Sprache;
-using System.Configuration;
 using System.Net;
 using Twitter.Service.Services;
-using Twitter.StreamApi.Controllers.V1;
-using Twitter.StreammingApi.Controllers.V1;
 
-namespace Twitter.StreammimgApi.Tests
+namespace Twitter.Api.Tests
 {
     [TestFixture]
     public class HashTagApiTests

@@ -10,7 +10,7 @@ namespace Twitter.Service.Services
         Task <HashTag> GetByTwitterHashTagAsync(string twitterTweetId);
         Task<List<string>> GetHashTags(int topNthvalue);
         Task<List<HashTag>> GetHashTags(PaginationParams? @params);
-        Task<List<HashTag>> GetHashTagsForUI();
+        Task<List<HashTagDto>> GetHashTagsForUI();
 
     }
 }

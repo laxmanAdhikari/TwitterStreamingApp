@@ -6,7 +6,7 @@ using Twitter.Core.Exceptions;
 using Twitter.Service.Pagination;
 using Twitter.Service.Services;
 
-namespace Twitter.StreammingApi.Controllers.V1
+namespace Twitter.Api.Controllers.V1
 {
     [ApiController]
     public class HashTagController : ControllerBase

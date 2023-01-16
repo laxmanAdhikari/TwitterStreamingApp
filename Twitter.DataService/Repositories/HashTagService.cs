@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Twitter.Core.Extentions;
+using Twitter.Data;
 using Twitter.Model;
 using Twitter.Model.Entities;
-using Twitter.Service.Data;
 using Twitter.Service.Dto;
 using Twitter.Service.Pagination;
 using Twitter.Service.Services.Base;
@@ -16,10 +16,12 @@ namespace Twitter.Service.Services
         private readonly IMapper _mapper;
         protected new readonly DbContextOptions<TwitterDbContext> _twitterDbContext;
 
-        public HashTagService(DbContextOptions<TwitterDbContext> twitterDbContext, ILogger<HashTagService> logger, IMapper mapper) : base(twitterDbContext, logger) {
+        public HashTagService(DbContextOptions<TwitterDbContext> twitterDbContext, ILogger<HashTagService> logger, IMapper mapper) : base(twitterDbContext, logger)
+        {
 
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _twitterDbContext = twitterDbContext;
+            _mapper = mapper;
         }
 
         public List<string> HashTagCollection { get; set; }
@@ -102,19 +104,19 @@ namespace Twitter.Service.Services
                    .OrderByDescending(hashtag => hashtag.Created).ToListAsync();
         }
 
-        public async Task<List<HashTag>> GetHashTagsForUI()
+        public async Task<List<HashTagDto>> GetHashTagsForUI()
         {
 
             try
             {
                 using var db = new TwitterDbContext(_twitterDbContext);
 
-                return await db.HashTagsEntities.OrderByDescending(hashtag => hashtag.Id)
+                var hashTags= await db.HashTagsEntities.OrderByDescending(hashtag => hashtag.Id)
                    .OrderByDescending(hashtag => hashtag.Created).ToListAsync().ConfigureAwait(false);
 
-                //var hashTagDtos = _mapper.Map<IEnumerable<HashTagDto>>(hashTags).ToList();
+                var hashTagDtos = _mapper.Map<IEnumerable<HashTagDto>>(hashTags).ToList();
 
-                // return hashTagDtos;
+                 return hashTagDtos;
             }
             catch(Exception ex) {
 

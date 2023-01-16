@@ -1,4 +1,4 @@
-﻿using Twitter.Service.Data;
+﻿using Twitter.Data;
 using Twitter.Service.Services;
 
 namespace Twitter.StreamApi.Extentions
@@ -23,10 +23,10 @@ namespace Twitter.StreamApi.Extentions
             services.AddScoped<ITweetService, TweetService>();
             services.AddScoped<IHashTagService, HashTagService>();
 
-            services.AddSingleton<ITwitterApiTweetService, TwitterApiTweetService>();
+            //services.AddSingleton<ITwitterApiTweetService, TwitterApiTweetService>();
 
-            services.AddHostedService<TwitterIntegrationBackgroundService>();
-            services.AddSingleton<ITwitterIntegrationJobService, TwitterIntegrationJobService>();
+            //services.AddHostedService<TwitterIntegrationBackgroundService>();
+            //services.AddSingleton<ITwitterIntegrationJobService, TwitterIntegrationJobService>();
 
             // Register IHttpFactory
             services.AddHttpClient();

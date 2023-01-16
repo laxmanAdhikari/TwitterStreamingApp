@@ -3,42 +3,43 @@
 @using Twitter.Model.Entities;
 @using Radzen;
 @using Radzen.Blazor;
+@using Twitter.Service.Dto;
 
 
 @inject IHashTagService HashTagService
 
-@if (getHashTagError && hashtags.Count < 0)
+@if (getHashTagError || hashtags == null || hashtags.Count < 1)
 {
     <p><em>Could not fetch tweet at this time. Please try later !!!</em></p>
 }
 else
 {
-  
-        <header>
-            <div class="alert-primary" align="center"><h1> Tweet Hash Tags</h1></div>
-        </header>   
-        <RadzenDataGrid Data="@hashtags" TItem="HashTag"  AllowFiltering="true" AllowPaging="true" AllowSorting="false" >
-            <Columns>
-                <RadzenDataGridColumn  Width="200px" TItem="HashTag" Property="TweeterTweetId" Title="Tweet ID">
-                    <FooterTemplate>
+
+    <header>
+        <div class="alert-primary" align="center"><h1> Tweet Hash Tags</h1></div>
+    </header>
+    <RadzenDataGrid Data="@hashtags" TItem="HashTagDto" AllowFiltering="true" AllowPaging="true" AllowSorting="false">
+        <Columns>
+            <RadzenDataGridColumn Width="200px" TItem="HashTagDto" Property="TweeterTweetId" Title="Tweet ID">
+                <FooterTemplate>
                     Total records: <b>@hashtags.Count()</b>
-                    </FooterTemplate>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn  Width="200px" TItem="HashTag" Property="AuthorId" Title="Author ID" />
-                <RadzenDataGridColumn  Width="200px" TItem="HashTag" Property="HashTagName" Title="HashTag Name" />
+                </FooterTemplate>
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn Width="200px" TItem="HashTagDto" Property="AuthorId" Title="Author ID" />
+            <RadzenDataGridColumn Width="200px" TItem="HashTagDto" Property="HashTagName" Title="HashTag Name" />
 
-            </Columns>
-        </RadzenDataGrid>
-    
-
+        </Columns>
+    </RadzenDataGrid>
 }
 
-   
- @code
+
+
+
+@code
 {
 
     private bool getHashTagError;
-    private List<HashTag> hashtags = new List<HashTag>();
+    private List<HashTagDto> hashtags;
 
     protected override async Task OnInitializedAsync()
     {

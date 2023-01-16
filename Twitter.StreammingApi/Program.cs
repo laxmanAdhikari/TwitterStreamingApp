@@ -42,7 +42,7 @@ app.UseMiddleware<ErrorHandling>();
 
 app.MapControllers();
 
-app.MapHub<TwitterStreamHub>("/twitter-hub");
+//app.MapHub<TwitterStreamHub>("/twitter-hub");
 
 app.MapControllers();
 

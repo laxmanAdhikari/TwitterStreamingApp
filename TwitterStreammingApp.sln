@@ -5,17 +5,19 @@ VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Twitter.Core", "Twitter.Core\Twitter.Core.csproj", "{4654CE2B-D4D5-46E1-9633-E29281F60A2A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Twitter.Model", "Twitter.Model\Twitter.Model.csproj", "{AD8E724F-5E38-450E-A073-314A671FF3D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Twitter.Domain", "Twitter.Model\Twitter.Domain.csproj", "{AD8E724F-5E38-450E-A073-314A671FF3D8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3B98FB85-2742-4E80-9619-981D6327C200}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Twitter.StreammingApi", "Twitter.StreammingApi\Twitter.StreammingApi.csproj", "{C1ACB103-A8FE-486B-8084-5CD181403AB9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwitterStream.Api", "Twitter.StreammingApi\TwitterStream.Api.csproj", "{C1ACB103-A8FE-486B-8084-5CD181403AB9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Twitter.StreammimgApi.Tests", "Twitter.StreammingApi.Tests\Twitter.StreammimgApi.Tests.csproj", "{591D31ED-2C0D-4ED4-98DC-8EA527CFDE86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Twitter.Api.Tests", "Twitter.StreammingApi.Tests\Twitter.Api.Tests.csproj", "{591D31ED-2C0D-4ED4-98DC-8EA527CFDE86}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Twitter.Service", "Twitter.DataService\Twitter.Service.csproj", "{12B641D4-EAC6-4AFC-8CCC-B4D0D1876439}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Twitter.Data", "Twitter.DataService\Twitter.Data.csproj", "{12B641D4-EAC6-4AFC-8CCC-B4D0D1876439}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitter.BlazorApp", "Twitter.BlazorApp\Twitter.BlazorApp.csproj", "{952A530A-5C87-467F-8F68-0A6F53364954}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Twitter.BlazorApp", "Twitter.BlazorApp\Twitter.BlazorApp.csproj", "{952A530A-5C87-467F-8F68-0A6F53364954}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twitter.BackgroundWorker", "Twitter.BackgroundWorker\Twitter.BackgroundWorker.csproj", "{00C76998-645B-447F-8DCE-ED9CC5E63052}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +48,10 @@ Global
 		{952A530A-5C87-467F-8F68-0A6F53364954}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{952A530A-5C87-467F-8F68-0A6F53364954}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{952A530A-5C87-467F-8F68-0A6F53364954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00C76998-645B-447F-8DCE-ED9CC5E63052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00C76998-645B-447F-8DCE-ED9CC5E63052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00C76998-645B-447F-8DCE-ED9CC5E63052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00C76998-645B-447F-8DCE-ED9CC5E63052}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

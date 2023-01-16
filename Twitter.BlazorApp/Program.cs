@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
 using Twitter.Core.Constants;
-using Twitter.Service.Data;
+using Twitter.Data;
+using Twitter.Service.Mappings;
 using Twitter.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +21,7 @@ builder.Services.AddScoped<ITweetService, TweetService>();
 
 builder.Services.AddScoped<IHashTagService, HashTagService>();
 
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
 var app = builder.Build();
 

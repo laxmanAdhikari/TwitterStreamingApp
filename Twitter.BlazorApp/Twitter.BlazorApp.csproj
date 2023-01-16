@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
@@ -12,8 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Twitter.Core\Twitter.Core.csproj" />
-    <ProjectReference Include="..\Twitter.DataService\Twitter.Service.csproj" />
-    <ProjectReference Include="..\Twitter.Model\Twitter.Model.csproj" />
+    <ProjectReference Include="..\Twitter.DataService\Twitter.Data.csproj" />
+    <ProjectReference Include="..\Twitter.Model\Twitter.Domain.csproj" />
   </ItemGroup>
 
 </Project>
