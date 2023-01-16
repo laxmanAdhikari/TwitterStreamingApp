@@ -6,10 +6,10 @@ using Twitter.Core.Exceptions;
 using Twitter.Service.Pagination;
 using Twitter.Service.Services;
 
-namespace Twitter.Api.Controllers.V1
+namespace Twitter.Api.Controllers.V2
 {
     [ApiController]
-    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     public class HashTagController : ControllerBase
     {
         private readonly IHashTagService _hashTagService;
@@ -21,7 +21,7 @@ namespace Twitter.Api.Controllers.V1
             _logger = logger;
         }
 
-        [HttpGet, MapToApiVersion("1.0")]
+        [HttpGet, MapToApiVersion("2.0")]
         [Route("api/v{version:apiVersion}/hashtags/{topnth}")]
         [SwaggerOperation(Summary = "Get HashTags", Description = "Get top nth HashTags from the recent tweets.")]
         [Produces("application/json")]
@@ -46,7 +46,7 @@ namespace Twitter.Api.Controllers.V1
 
         }
 
-        [HttpGet, MapToApiVersion("1.0")]
+        [HttpGet, MapToApiVersion("2.0")]
         [Route("api/v{version:apiVersion}/hashtags/pagination")]
         [SwaggerOperation(Summary = "Get HashTags", Description = "Get Paginated Hashtags from the recent tweets.")]
         [Produces("application/json")]

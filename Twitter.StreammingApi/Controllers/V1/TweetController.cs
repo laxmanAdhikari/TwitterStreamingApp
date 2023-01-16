@@ -19,7 +19,7 @@ namespace Twitter.StreamApi.Controllers.V1
 
 
         [HttpGet]
-        [Route("api/v1/count")]
+        [Route("api/v{version:apiVersion}/count")]
         [SwaggerOperation(Summary = "Get tweet counts.", Description = "Get incremental count of the recent tweets from twitter streaming API.")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
