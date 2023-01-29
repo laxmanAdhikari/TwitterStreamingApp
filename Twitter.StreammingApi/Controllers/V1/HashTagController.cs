@@ -29,9 +29,12 @@ namespace Twitter.Api.Controllers.V1
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetTopNthHashTags(int topnth)
         {
-            var parameters = new Dictionary<string, object>();
+            var parameters = new Dictionary<string, object>
+            {
+                { "Method", "GetTopNHashTagsAsync" }
+            };
 
-            parameters.Add("Method", "GetTopNHashTagsAsync");
+            _logger.LogInformation("Get top Nth Hash Tags");
 
             try
             {
@@ -40,7 +43,9 @@ namespace Twitter.Api.Controllers.V1
                 return Ok(result);
             }
             catch (Exception exception)
+
             {
+                _logger.LogError(exception,$"error{exception.Message}", parameters.ToArray());
                 return BadRequest(exception.Message);
             }
 

@@ -1,9 +1,39 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Serilog;
+using Serilog.Sinks.MSSqlServer;
 using TwitterStream.Api;
+using ILogger = Serilog.ILogger;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
+
+//var loggerConfiguration = new LoggerConfiguration()
+//    .MinimumLevel.Debug()
+//    .WriteTo.File("applicationLog.txt")
+//    .WriteTo.Console();
+
+//var logger = loggerConfiguration.CreateLogger();
+
+//builder.Services.AddSingleton<ILogger>(logger);
+
+DotNetEnv.Env.TraversePath().Load();
+var connectionString = (Environment.GetEnvironmentVariable(TwitterConstants.DATABASE_CONNECTION));
+
+var sinkOptions = new MSSqlServerSinkOptions
+{
+    TableName = "Logs",
+    SchemaName = "dbo",
+    AutoCreateSqlTable = true,
+    BatchPostingLimit = 100,
+    BatchPeriod = TimeSpan.FromSeconds(5)
+};
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.MSSqlServer(connectionString, sinkOptions)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.ServicesDependencyInjection();
@@ -74,6 +104,7 @@ app.MapDefaultControllerRoute();
 app.UseMiddleware<ErrorHandling>();
 
 app.MapControllers();
+
 
 //app.MapHub<TwitterStreamHub>("/twitter-hub");
 
