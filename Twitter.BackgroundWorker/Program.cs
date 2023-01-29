@@ -16,6 +16,7 @@ using IHost host = Host.CreateDefaultBuilder(args)
     {
         options.ServiceName = "Twitter Streaming Service";
     })
+
     .ConfigureServices(services =>
     {
         LoggerProviderOptions.RegisterProviderOptions<
@@ -34,9 +35,9 @@ using IHost host = Host.CreateDefaultBuilder(args)
         services.AddHttpClient();
         services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
     })
+
     .ConfigureLogging((context, logging) =>
     {
-        // See: https://github.com/dotnet/runtime/issues/47303
         logging.AddConfiguration(
             context.Configuration.GetSection("Logging"));
     })
